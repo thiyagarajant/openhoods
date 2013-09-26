@@ -24,7 +24,7 @@ gem 'cancan', git: "https://github.com/nukturnal/cancan.git"
 gem 'acts_as_commentable'
 #gem "paperclip-ffmpeg"
 
-
+gem 'pg'
 gem 'faker'
 gem 'populator'
 
