@@ -1,0 +1,41 @@
+<!-- <h2>Forgot your password?</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= f.error_notification %>
+  <%# raise devise_error_messages!.inspect %>
+
+  <div class="form-inputs">
+    <%= f.input :email, :required => true, :autofocus => true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Send me reset password instructions" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+ -->
+
+<div class="login_container">
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post,:id => "session_form" }) do |f| %>
+
+    <div class='title'>Reset my password</div>
+    <%= render 'layouts/messages' %>
+    <%= render 'layouts/errormessage'%>
+    <div class='content'>
+      <div class="formRow">
+        <div class="input-prepend">
+          <span class="add-on" title='Email'>@</span>
+          <%= f.text_field :email,
+              {:maxlength => 100, :value => params[:email], :placeholder=> 'Your email', :autocomplete => 'off'} %>
+        </div>
+      </div>
+    </div>
+
+    <div class="signin-bar clearfix">
+      <button class="btn btn-inverse " id="login_btn" type="submit">Reset password</button>
+      <span class='pull-right'><%= link_to 'Back to login page', '/' %></span>
+    </div>
+  <% end %>
+</div>
+<%= javascript_include_tag "sessions.js" %>

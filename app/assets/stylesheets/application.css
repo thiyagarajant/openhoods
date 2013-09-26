@@ -1,0 +1,112 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+#prof_img{
+  margin:12px 20px 10px 10px;
+}
+.container .row .call_block{
+  margin-top:110px!important;
+}
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner{
+  box-shadow: none!important;
+  -webkit-box-shadow :none!important;
+}
+.navbar-inner{
+  border-bottom: none!important;
+}
+.user_menu li{
+  list-style-type: none!important;
+  text-align: right;
+}
+.user_menu{
+  margin-top: 7px;
+}
+.user_menu li:first-child a, .user_menu li:last-child a{
+  color: red!important;
+  }
+
+#tabs {
+  padding-right: 100px;
+  width: 100%;
+  margin-top: 10px;
+}
+a {cursor:pointer;}
+
+#tabs li {
+    float:right;
+    list-style:none;
+    border-top:1px solid #ccc;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    margin-right:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+      outline:none;
+}
+#tabs li:first{
+  margin-right: 100px;
+}
+
+#tabs li a {
+
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #5685bc;;
+   padding-top: 7px;
+   padding-left: 35px;
+   padding-right: 35px;
+    padding-bottom: 8px;
+    display:block;
+    background: #FFF;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    text-decoration:none;
+    outline:none;
+
+}
+
+#tabs li a.inactive{
+    padding-top:5px;
+    padding-bottom:8px;
+  padding-left: 35px;
+  padding-right: 35px;
+    color:white;
+    background: red;
+   outline:none;
+   border-bottom: solid 1px #CCC;
+   text-decoration:none;
+}
+#tabs li a.inactive:hover {
+  color: white;
+  outline:none;
+}
+ #tabs li a:hover {
+
+
+    color: #5685bc;
+      outline:none;
+}
+
+.pagination{
+  float:right;
+  padding: 10px;
+  background-color: silver;
+  border-radius: 10px;
+}
+.pagination a{
+  padding: 5px;
+  font-weight: bold;
+
+}
+
+

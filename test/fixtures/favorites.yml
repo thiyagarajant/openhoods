@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  active: false
+  user_id: 1
+  vehicle_id: 1
+
+two:
+  active: false
+  user_id: 1
+  vehicle_id: 1

@@ -1,0 +1,63 @@
+<hr class="bar">
+<%= form_for "search", html: { method: :get, :id => "filter" } do|f| %>
+
+  <div class="filter v_back">
+    <h5>SEARCH AGAIN </h5>
+      <%= text_field_tag :title, params[:title], :class=> "span8" %>
+      <%= image_submit_tag("search.png") %>
+  </div>
+
+<hr class="bar">
+  <div class="filter v_back box-title span12">
+    <h5>FILTER BY </h5>
+    <%= check_box_tag 'search[filter_all]', '1', @filters.filter_all=="1" %>
+    <%= label_tag "all"%>
+    <%= check_box_tag 'search[filter_car]', '1', @filters.filter_car=="1" %>
+    <%= label_tag "car"%>
+    <%= check_box_tag 'search[filter_truk]', '1', @filters.filter_truk=="1" %>
+    <%= label_tag "truk"%>
+    <%= check_box_tag 'search[filter_hybird]', '1', @filters.filter_hybird=="1" %>
+    <%= label_tag "hybird"%>
+    <%= check_box_tag 'search[filter_sport]', '1', @filters.filter_sport=="1" %>
+    <%= label_tag "sport"%>
+    <%= check_box_tag 'search[filter_suv]', '1', @filters.filter_suv=="1" %>
+    <%= label_tag "suv"%>
+    <%= check_box_tag 'search[filter_wagon]', '1', @filters.filter_wagon=="1" %>
+    <%= label_tag "wagon"%>
+  </div>
+
+<hr class="bar">
+  <div class="filter v_back box-title span12">
+    <h5>CONDITIONS </h5>
+    <%= check_box_tag 'search[condition_all]', '1', @filters.condition_all=="1" %>
+    <%= label_tag "all"%>
+    <%= check_box_tag 'search[condition_new]', '1', @filters.condition_new=="1" %>
+    <%= label_tag "New"%>
+    <%= check_box_tag 'search[condition_used]', '1', @filters.condition_used=="1" %>
+    <%= label_tag "used"%>
+    <%= check_box_tag 'search[vehicle_condition_ns]', '1', @filters.vehicle_condition_ns=="1" %>
+    <%= label_tag "Not Specified"%>
+  </div>
+
+<hr class="bar">
+  <div class="filter v_back box-title span12 ">
+    <h5>PRICE </h5>
+    $ <%= text_field_tag 'search[from]',nil,:value =>@filters.from, :class=> "span4" %>
+    <span id = "price_to">to </span>
+    $<%= text_field_tag 'search[to]',nil,:value =>@filters.to, :class=> "span4" %>
+  </div>
+
+<hr class="bar">
+
+  <div class="filter v_back box-title span12">
+    <h5>LOCATION </h5>
+    <%= check_box_tag 'search[location_all]', '1', @filters.location_all=="1" %>
+    <%= label_tag "all"%>
+    <%= check_box_tag 'search[location_ua]', '1', @filters.location_ua=="1" %>
+    <%= label_tag "North America"%>
+    <%= check_box_tag 'search[location_us]', '1', @filters.location_us=="1" %>
+    <%= label_tag "US Only"%>
+    <%= check_box_tag 'search[location_worldwide]', '1', @filters.location_worldwide=="1" %>
+    <%= label_tag "worldwide"%>
+  </div>
+<% end %>

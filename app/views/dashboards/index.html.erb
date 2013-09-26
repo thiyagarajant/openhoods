@@ -1,0 +1,145 @@
+<div class="row-fluid" >
+
+<!-- left start-->
+  <div class="span3 left_side">
+    <hr class="bar rex">
+    <h5>MY DASHBOARD </h5>
+    <ul>
+      <li>MY GARAGE</li>
+      <li>GROUPS</li>
+      <li>MESSAGES</li>
+      <li>BLOGS</li>
+    </ul>
+
+    <hr class="bar rex">
+    <div class="box-title span12">
+      <h5 class="span8 pull-left">MY FRIENDS</h5>
+      <span class="pull-right span4"><%= link_to "View all", "#" %></span>
+    </div>
+
+      <% me = FbGraph::User.me(current_user.authentications.find_by_provider("facebook").token) rescue nil %>
+<%# me.app_request!(:message => 'invitation message',:to => me.friends.first. identifier.to_i
+)%>
+        <%if me.present?%>
+          <% me.friends.take(16).each do |x| %>
+
+            <span id='img' title="<%=x.name%>"><%=link_to (image_tag x.picture), '#'%></span>
+          <%end%>
+        <%else%>
+          Please connect Your Facebook account to invite your friends
+        <%end%>
+
+
+
+
+
+      <hr class="bar rex">
+
+      <div class="box-title span12">
+        <h5 class="span8 pull-left">MY FAVES</h5>
+        <span class="pull-right span4"><%= link_to "View all", "#" %></span>
+      </div>
+      <%current_user.favorites.take(4).each do|x|%>
+        <span id='img-big'> <%= image_tag x.vehicle.avatar.url(:medium) %></span>
+      <%end%>
+      <hr class="bar rex">
+
+
+  </div>
+<!-- left end -->
+
+<!-- center start -->
+  <div class="span6 " >
+    <div class="center-box span12">
+      <h3 class="span8 pull-left"><%=current_user.name%></h3>
+      <span class="pull-right span4"><%= link_to "Edit my profile", edit_user_registration_path %></span>
+    </div>
+    <span class="span12">
+      <hr class="bar center_bar">
+      <%= image_tag current_user.cover_photo.url(:large) %>
+    </span>
+    <hr class="bar rex">
+    <div class="box-title span12">
+        <h5 class="span8 pull-left">MY Videos</h5>
+        <span class="pull-right span4"><%= link_to "View all", "#" %></span>
+      </div>
+    <div class='carosel'>
+      <%Video.all.each do |x|%>
+      <%=image_tag x.vehicle.avatar.url(:small)rescue nil %>
+      <%end%>
+    </div>
+    <hr class="bar rex">
+    <h3 class="span8 pull-left">MY FEED</h3>
+    <div >
+      <% Comment.all.reverse_each do |i|%>
+        <div class='span12' id='cmt'>
+          <div class='span5'>
+            <span class='pull-left'><%=image_tag i.user.avatar.url(:small)rescue nil %></span>
+            <span>
+              <%= i.user.created_at.strftime("%B %d, %Y") rescue nil%><br>
+              <%= i.user.name rescue nil%>
+            </span>
+          </div>
+            <span class='red'><%= i.title%></span><br>
+            <%=i.comment%>
+          <hr>
+        </div>
+      <%end%>
+    </div>
+</div>
+
+<!-- center end -->
+
+<!-- right start -->
+  <div class="span3 blog-cont " >
+    <hr class="bar rex">
+    <div class="box-title">
+      <h5 class="span8 pull-left">MY BLOG</h5>
+      <span class="pull-right span4"><%= link_to "View all", "#" %></span>
+    </div>
+    <% Forem::Forum.all.take(5).each do |x| %>
+
+      <div class='blog-div span11 '>
+        <span class='span10'>Category : <%= x.category.name %></span>
+        <span class='red '>Title : <%=link_to x.name, "/forums/forums/#{x.name.gsub(/ /, '-')}" %></span>
+        <span class='span10'><%= x.description %></span>
+      </div>
+    <%end%>
+  </div>
+
+  <div class="span3 " >
+
+    <hr class="bar rex">
+
+    <div class="box-title">
+      <h5 class="span8 pull-left">UPCOMING EVENTS</h5>
+      <span class="pull-right span4"><%= link_to "View all", "#" %></span>
+          <%Event.all.take(4).reverse_each do |x|%>
+      <div class = 'span12 event_cont'>
+        <span>
+          <%=link_to (image_tag x.avatar.url(:medium)), event_path(x), :class=>"span4 pull-left"%>
+        </span>
+        <span class="span8 pull-right">
+          <h6 class='red span12'><%= x.name.capitalize%></h6>
+          <span id='event_detail' class='width span12'><%= x.s_date.strftime("%d %m,%Y")%></span>
+          <span class='red width span12'><%= x.location%></span>
+        </span>
+
+      </div>
+          <%end%>
+
+    </div>
+
+    <hr class="bar rex">
+
+    <div class="box-title">
+      <h5 class="span8 pull-left">SUGGESTED USERS</h5>
+      <span class="pull-right span4"><%= link_to "View all", "#" %></span>
+    </div>
+
+    <hr class="bar rex">
+  </div>
+<!-- right end-->
+
+
+</div>

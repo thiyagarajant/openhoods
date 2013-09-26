@@ -1,0 +1,11 @@
+<%= simple_form_for [forem, :admin, @topic] do |f| %>
+  <%= f.input :subject %>
+  <%= f.association :forum , :label => "Forum" %>
+  <%= f.input :locked %>
+  <%= f.input :pinned %>
+  <%= f.input :hidden %>
+
+  <br />
+  <%= f.submit :class => "btn btn-primary" %>
+<% end %>
+<%= link_to t('back_to_admin', :scope => "forem.admin"), forem.admin_root_path %><br><br>
