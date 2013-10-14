@@ -29,6 +29,7 @@ $(document).ready(function(){
 
   $('#v_video').click(function(){
     $('#att_video').show()
+    $('#cancel_video').show();
     if ($('#att_video').val()!= ''){
       $(form).submit();
     }
@@ -37,7 +38,35 @@ $(document).ready(function(){
 
   })
 
+  $('#cancel_video').click(function(){
+    $('#att_video').hide();
+    $('#att_video').val('');
+    $('#cancel_video').hide();
+    return false
+  })
+
+
+  $('.make_fav').click(function(){
+    var v_id=$(this).attr('id');
+    var th = this
+    $.ajax({
+      dataType: 'json',  // not jsonp
+      url: "/favo",
+      type: "get",
+      data: { id : v_id },
+      success: function(response) {
+        console.log(response.active)
+          if (response.active==false){
+            $(th).addClass('fav_ajax').attr("title",'Add_Favorite')
+            $(th).removeClass('unfav_ajax')
+          }else{
+            $(th).addClass('unfav_ajax').attr('title','Remove_Favorite')
+            $(th).removeClass('fav_ajax')
+          }
+      }
+    });
+
+  })
 
 });
-
 

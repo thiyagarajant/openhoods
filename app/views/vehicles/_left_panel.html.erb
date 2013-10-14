@@ -24,6 +24,10 @@
     <%= label_tag "suv"%>
     <%= check_box_tag 'search[filter_wagon]', '1', @filters.filter_wagon=="1" %>
     <%= label_tag "wagon"%>
+    <div class="form-inputs">
+      <%= check_box_tag 'search[fav]', '1', @filters.fav=="1" %>
+      <h5 style='margin-left:20px'>Favorite</h5>
+    </div>
   </div>
 
 <hr class="bar">

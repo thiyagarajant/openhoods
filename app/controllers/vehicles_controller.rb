@@ -23,16 +23,17 @@ class VehiclesController < ApplicationController
   end
 
   def add_favorite
-    fav = Favorite.create(:active=>true,:user_id => current_user.id, :vehicle_id => params[:id])
-    redirect_to vehicles_url
-  end
+    @vehicle = Favorite.find_by_vehicle_id(params[:id])
+    if @vehicle.present?
+      @vehicle.update_attributes(:active => (!@vehicle.active))
+    else
+     @vehicle = Favorite.create(:active=>true,:user_id => current_user.id, :vehicle_id => params[:id])
+    end
+    respond_to do |format|
+    format.json { render json: @vehicle }
+    end
 
-  def remove_favorite
-    fav = Favorite.find(params[:id])
-    fav.delete
-    redirect_to vehicles_url
   end
-
 
   def create
     @vehicle = Vehicle.new(vehicle_params)

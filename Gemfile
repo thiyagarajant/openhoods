@@ -22,7 +22,10 @@ gem 'forem', git: "https://github.com/radar/forem.git", :branch => "rails4"
 gem 'friendly_id', git: "https://github.com/FriendlyId/friendly_id.git"
 gem 'cancan', git: "https://github.com/nukturnal/cancan.git"
 gem 'acts_as_commentable'
+# gem 'activeadmin', git: "https://github.com/gregbell/active_admin.git"
+
 #gem "paperclip-ffmpeg"
+
 
 gem 'pg'
 gem 'faker'

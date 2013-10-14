@@ -1,7 +1,7 @@
-<div class="row-fluid" >
+<div class="row-fluid"  >
 
 <!-- left start-->
-  <div class="span3 left_side">
+  <div class="span3 left_side" >
     <hr class="bar rex">
     <h5>MY DASHBOARD </h5>
     <ul>
@@ -39,8 +39,8 @@
         <h5 class="span8 pull-left">MY FAVES</h5>
         <span class="pull-right span4"><%= link_to "View all", "#" %></span>
       </div>
-      <%current_user.favorites.take(4).each do|x|%>
-        <span id='img-big'> <%= image_tag x.vehicle.avatar.url(:medium) %></span>
+      <%current_user.favorites.where(:active=> true).take(4).reverse_each do|x|%>
+        <span id='img-big'> <%=link_to (image_tag x.vehicle.avatar.url(:medium)) , vehicle_path(x.vehicle_id) %></span>
       <%end%>
       <hr class="bar rex">
 
@@ -60,13 +60,26 @@
     </span>
     <hr class="bar rex">
     <div class="box-title span12">
-        <h5 class="span8 pull-left">MY Videos</h5>
+        <h3 class="span8 pull-left">MY Videos</h3>
         <span class="pull-right span4"><%= link_to "View all", "#" %></span>
       </div>
     <div class='carosel'>
-      <%Video.all.each do |x|%>
-      <%=image_tag x.vehicle.avatar.url(:small)rescue nil %>
-      <%end%>
+      <div class="span12 welcome-image">
+        <div id="myCarousel" class="carousel slide ">
+        <!-- Carousel items -->
+        <div class="carousel-inner  ">
+          <%Video.all.each_with_index do |x, i|%>
+            <%= link_to image_tag(x.vehicle.avatar.url(:medium)), vehicle_path(x.vehicle_id,:video=>'play_video'),:class=> i==0 ? 'item active' : 'item' %>
+          <%end%>
+
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+      </div>
+
+
     </div>
     <hr class="bar rex">
     <h3 class="span8 pull-left">MY FEED</h3>
@@ -97,13 +110,14 @@
       <h5 class="span8 pull-left">MY BLOG</h5>
       <span class="pull-right span4"><%= link_to "View all", "#" %></span>
     </div>
-    <% Forem::Forum.all.take(5).each do |x| %>
-
-      <div class='blog-div span11 '>
-        <span class='span10'>Category : <%= x.category.name %></span>
-        <span class='red '>Title : <%=link_to x.name, "/forums/forums/#{x.name.gsub(/ /, '-')}" %></span>
-        <span class='span10'><%= x.description %></span>
-      </div>
+    <%if Forem::Forum.count>0%>
+      <% Forem::Forum.all.take(5).each do |x| %>
+        <div class='blog-div span11 '>
+          <span class='span10'>Category : <%= x.category.name  %></span>
+          <span class='red '>Title : <%=link_to x.name, "/forums/forums/#{x.name.gsub(/ /, '-')}" %></span>
+          <span class='span10'><%= x.description %></span>
+        </div>
+      <%end%>
     <%end%>
   </div>
 
@@ -141,5 +155,3 @@
   </div>
 <!-- right end-->
 
-
-</div>

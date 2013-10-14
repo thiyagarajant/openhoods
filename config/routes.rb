@@ -1,13 +1,13 @@
 Openhoods::Application.routes.draw do
 
 
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},controllers: {:omniauth_callbacks => "users/omniauth_callbacks",  registrations: "users/registrations" }
 
-  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
-              controllers: {omniauth_callbacks: "authentications",  registrations: "users/registrations" }
+
 
   devise_scope :user do
-    get 'sign_in', :to => 'devise/sessions#new'
-    get 'sign_out', :to => 'devise/sessions#destroy'
+#    get 'sign_in', :to => 'devise/sessions#new'
+ #   get 'sign_out', :to => 'devise/sessions#destroy'
     root to: "devise/sessions#new"
   end
 
@@ -25,7 +25,6 @@ Openhoods::Application.routes.draw do
 
   resources :vehicles
 
-
   get "/vehicles" => 'vehicles#index', :as => "user_root"
   get "/comment" => 'vehicles#comment', :as => 'comment'
   get '/favo' => 'vehicles#add_favorite', :as => 'favo'
@@ -35,6 +34,7 @@ Openhoods::Application.routes.draw do
   namespace :admin do
     resources :users
   end
+
 
  # devise_scope :user do
    #root to: "devise/sessions#new"

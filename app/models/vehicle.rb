@@ -9,6 +9,7 @@ class Vehicle < ActiveRecord::Base
   has_attached_file :avatar, :styles => {:small => 'x50',:large => "1280x800>", :medium => "300x300>", :thumb => "100x100>" }#, :default_url => "/images/:style/missing.png"
 
   default_scope order('created_at desc')
+
   class << self
     def filter_records(params)
       @rec = Vehicle.all
@@ -18,6 +19,7 @@ class Vehicle < ActiveRecord::Base
         self.condition_search(val)
         self.price_search(val)
         self.location_search(val)
+        self.favorite_search(val)
         if val.key?(:filter_car) ||val.key?(:filter_truk)||val.key?(:filter_hybird)||val.key?(:filter_sport)|| val.key?(:filter_suv)|| val.key?(:filter_wagon)
           @re = []
           val.each do |key, value|
@@ -32,6 +34,11 @@ class Vehicle < ActiveRecord::Base
         end
       end
       @rec
+    end
+
+    def favorite_search(val)
+      # raise Favorite.where(:active=> true).includes(@rec).inspect
+      @rec = @rec.where(:id =>Favorite.where(:active => true).collect(&:vehicle_id)) if val[:fav].present?
     end
 
     def location_search(val)
