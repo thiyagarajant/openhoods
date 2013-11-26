@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+
   def forem_user
     current_user
   end
