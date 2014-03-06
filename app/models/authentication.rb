@@ -1,4 +1,5 @@
 class Authentication < ActiveRecord::Base
+
   belongs_to :user
 
   def self.fb_basic_info(param)
